@@ -1,0 +1,33 @@
+syntax = "proto3";
+
+enum PropertyPair {
+    TP = 0;
+    TVF = 1;
+    PVF = 2;
+    PH = 3;
+    PS = 4;
+}
+
+message CalculationRequest {
+    PropertyPair propertyPair = 1;
+    double value = 2;
+    string fluid = 3;
+}
+
+message FluidProperties {
+    float temperature = 1;
+    float pressure = 2;
+    float specificVolume = 3;
+    float specificInternalEnergy = 4;
+    float specificEnthalpy = 5;
+    float specificEntropy = 6;
+    float vaporFraction = 7 ;
+}
+
+message CalculationResponse {
+    FluidProperties fluidProperties = 1;
+}
+
+service CalculationService {
+    rpc Calculate(CalculationRequest) returns (CalculationResponse){};
+}
